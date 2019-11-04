@@ -1,0 +1,108 @@
+run:
+  timeout: 1m # default 1m
+  tests: true # default true
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true # default false
+    check-blank: true # default false
+    ignore: "fmt:.*" # default fmt:.*
+    exclude: "" # default ""
+  govet:
+    enable-all: true
+    settings:
+      shadow:
+        strict: true # default false
+  structcheck:
+    exported-fields: true # default false
+  unused:
+    check-exported: true # default false
+  varcheck:
+    exported-fields: true # default false
+  dupl:
+    threshold: 150 # default 150
+  funlen:
+    lines: 60 # default 60
+    statements: 40 # default 40
+  gocognit:
+    min-complexity: 10 # minimal code complexity to report, 30 by default (but we recommend 10-20)
+  goconst:
+    min-len: 3 # default 3
+    min-occurrences: 3 # default 3
+  gocritic:
+    settings:
+      captLocal:
+        paramsOnly: false # default true
+      elseif:
+        skipBalanced: false # default true
+      underef:
+        skipRecvDeref: false # default true
+  gocyclo:
+    min-complexity: 15 # default 30
+  goimports:
+    local-prefixes: github.com/maratori/testpackage
+  golint:
+    min-confidence: 0.1 # default 0.8
+  lll:
+    line-length: 120 # default 120
+  maligned:
+    suggest-new: true # default false
+  misspell:
+    locale: us
+    ignore-words: "" # default: ""
+  nakedret:
+    max-func-lines: 0 # default 30
+  prealloc:
+    simple: false # default true
+    range-loops: true # default true
+    for-loops: true # default false
+  unparam:
+    check-exported: true # default false
+  wsl:
+    strict-append: true # default true
+    allow-assign-and-call: true # default true
+    allow-multiline-assign: true # default true
+    allow-case-trailing-whitespace: true # default true
+    allow-cuddle-declarations: false # default false
+
+linters:
+  disable-all: true
+  enable:
+    ## enabled by default
+    - deadcode
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - structcheck
+    - typecheck
+    #- unused # false positives
+    - varcheck
+    ## disabled by default
+    - bodyclose
+    - dupl
+    - funlen
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - goimports
+    - golint
+    - gosec
+    - lll
+    - maligned
+    - misspell
+    - nakedret
+    - prealloc
+    - scopelint
+    - unconvert
+    - unparam
+    - whitespace
+    - wsl
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

@@ -14,6 +14,7 @@ func TestAnalyzer_Good(t *testing.T) {
 	if err != nil {
 		t.FailNow()
 	}
+
 	analysistest.Run(t, testdata, testpackage.Analyzer)
 }
 
@@ -22,5 +23,6 @@ func TestAnalyzer_Bad(t *testing.T) {
 	if err != nil {
 		t.FailNow()
 	}
+
 	analysistest.Run(t, testdata, testpackage.Analyzer)
 }
