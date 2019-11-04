@@ -19,7 +19,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		if strings.HasSuffix(fileName, "_test.go") {
 			packageName := f.Name.Name
 			if !strings.HasSuffix(packageName, "_test") {
-				pass.Reportf(f.Pos(), `package should be "%s_test" instead of "%s"`, packageName, packageName)
+				pass.Reportf(f.Name.Pos(), `package should be "%s_test" instead of "%s"`, packageName, packageName)
 			}
 		}
 	}
