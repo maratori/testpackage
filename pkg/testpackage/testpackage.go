@@ -7,7 +7,7 @@ import (
 )
 
 // Analyzer that make you use a separate _test package
-var Analyzer = &analysis.Analyzer{
+var Analyzer = &analysis.Analyzer{ // nolint:gochecknoglobals,varcheck
 	Name: "testpackage",
 	Doc:  "linter that make you use a separate _test package",
 	Run:  run,
@@ -23,5 +23,6 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 		}
 	}
+
 	return nil, nil
 }
