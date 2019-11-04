@@ -15,7 +15,8 @@ func TestAnalyzer_Good(t *testing.T) {
 		t.FailNow()
 	}
 
-	analysistest.Run(t, testdata, testpackage.Analyzer)
+	skip := testpackage.DefaultSkipRegexp
+	analysistest.Run(t, testdata, testpackage.NewAnalyzer(&skip))
 }
 
 func TestAnalyzer_Bad(t *testing.T) {
@@ -24,5 +25,6 @@ func TestAnalyzer_Bad(t *testing.T) {
 		t.FailNow()
 	}
 
-	analysistest.Run(t, testdata, testpackage.Analyzer)
+	skip := testpackage.DefaultSkipRegexp
+	analysistest.Run(t, testdata, testpackage.NewAnalyzer(&skip))
 }
