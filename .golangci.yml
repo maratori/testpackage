@@ -78,7 +78,7 @@ linters:
     - structcheck
     - typecheck
     #- unused # false positives
-    - varcheck
+    #- varcheck # false positives
     ## disabled by default
     - bodyclose
     - dupl
