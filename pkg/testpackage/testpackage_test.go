@@ -28,3 +28,21 @@ func TestAnalyzer_Bad(t *testing.T) {
 	skip := testpackage.DefaultSkipRegexp
 	analysistest.Run(t, testdata, testpackage.NewAnalyzer(&skip))
 }
+
+func TestAnalyzer_InvalidRegexp(t *testing.T) {
+	invalid := `\Ca`
+	analyzer := testpackage.NewAnalyzer(&invalid)
+	result, err := analyzer.Run(nil)
+
+	if err == nil {
+		t.FailNow()
+	}
+
+	if err.Error() != "error parsing regexp: invalid escape sequence: `\\C`" {
+		t.Fatalf("Wrong error %q", err.Error())
+	}
+
+	if result != nil {
+		t.FailNow()
+	}
+}
