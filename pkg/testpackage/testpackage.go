@@ -1,21 +1,34 @@
 package testpackage
 
 import (
+	"flag"
 	"regexp"
 	"strings"
 
 	"golang.org/x/tools/go/analysis"
 )
 
-const DefaultSkipRegexp = `(export|internal)_test\.go`
+const (
+	SkipRegexpFlagName    = "skip-regexp"
+	SkipRegexpFlagUsage   = `regexp pattern to skip file by name. To not skip files use -skip-regexp="^$"`
+	SkipRegexpFlagDefault = `(export|internal)_test\.go`
+)
 
 // NewAnalyzer returns Analyzer that make you use a separate _test package
-func NewAnalyzer(skipFileRegexp *string) *analysis.Analyzer {
+func NewAnalyzer() *analysis.Analyzer {
+	var (
+		skipFileRegexp = SkipRegexpFlagDefault
+		fs             flag.FlagSet
+	)
+
+	fs.StringVar(&skipFileRegexp, SkipRegexpFlagName, skipFileRegexp, SkipRegexpFlagUsage)
+
 	return &analysis.Analyzer{
-		Name: "testpackage",
-		Doc:  "linter that make you use a separate _test package",
+		Name:  "testpackage",
+		Doc:   "linter that make you use a separate _test package",
+		Flags: fs,
 		Run: func(pass *analysis.Pass) (interface{}, error) {
-			skipFile, err := regexp.Compile(*skipFileRegexp)
+			skipFile, err := regexp.Compile(skipFileRegexp)
 			if err != nil {
 				return nil, err
 			}

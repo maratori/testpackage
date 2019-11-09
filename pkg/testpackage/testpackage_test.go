@@ -15,8 +15,7 @@ func TestAnalyzer_Good(t *testing.T) {
 		t.FailNow()
 	}
 
-	skip := testpackage.DefaultSkipRegexp
-	analysistest.Run(t, testdata, testpackage.NewAnalyzer(&skip))
+	analysistest.Run(t, testdata, testpackage.NewAnalyzer())
 }
 
 func TestAnalyzer_Bad(t *testing.T) {
@@ -25,13 +24,18 @@ func TestAnalyzer_Bad(t *testing.T) {
 		t.FailNow()
 	}
 
-	skip := testpackage.DefaultSkipRegexp
-	analysistest.Run(t, testdata, testpackage.NewAnalyzer(&skip))
+	analysistest.Run(t, testdata, testpackage.NewAnalyzer())
 }
 
 func TestAnalyzer_InvalidRegexp(t *testing.T) {
 	invalid := `\Ca`
-	analyzer := testpackage.NewAnalyzer(&invalid)
+	analyzer := testpackage.NewAnalyzer()
+	err := analyzer.Flags.Set(testpackage.SkipRegexpFlagName, invalid)
+
+	if err != nil {
+		t.FailNow()
+	}
+
 	result, err := analyzer.Run(nil)
 
 	if err == nil {
