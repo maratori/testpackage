@@ -14,7 +14,7 @@ const (
 	SkipRegexpFlagDefault = `(export|internal)_test\.go`
 )
 
-// NewAnalyzer returns Analyzer that make you use a separate _test package
+// NewAnalyzer returns Analyzer that makes you use a separate _test package
 func NewAnalyzer() *analysis.Analyzer {
 	var (
 		skipFileRegexp = SkipRegexpFlagDefault
@@ -25,7 +25,7 @@ func NewAnalyzer() *analysis.Analyzer {
 
 	return &analysis.Analyzer{
 		Name:  "testpackage",
-		Doc:   "linter that make you use a separate _test package",
+		Doc:   "linter that makes you use a separate _test package",
 		Flags: fs,
 		Run: func(pass *analysis.Pass) (interface{}, error) {
 			skipFile, err := regexp.Compile(skipFileRegexp)
