@@ -7,7 +7,7 @@ test:
 
 .PHONY: lint
 lint:
-	docker run --rm --name lint -v `pwd`:/app -w /app golangci/golangci-lint:v1.21.0 golangci-lint run
+	docker run --rm --name lint -v `pwd`:/app -w /app golangci/golangci-lint:v1.24.0 golangci-lint run
 
 .PHONY: tidy
 tidy:

@@ -19,13 +19,14 @@ linters-settings:
     check-exported: true # default false
   varcheck:
     exported-fields: true # default false
+
   dupl:
     threshold: 150 # default 150
   funlen:
     lines: 60 # default 60
     statements: 40 # default 40
   gocognit:
-    min-complexity: 10 # minimal code complexity to report, 30 by default (but we recommend 10-20)
+    min-complexity: 15 # minimal code complexity to report, 30 by default (but we recommend 10-20)
   goconst:
     min-len: 3 # default 3
     min-occurrences: 3 # default 3
@@ -42,7 +43,13 @@ linters-settings:
   goimports:
     local-prefixes: github.com/maratori/testpackage
   golint:
-    min-confidence: 0.1 # default 0.8
+    min-confidence: 0 # default 0.8
+  gomnd:
+    settings:
+      mnd:
+        # the list of enabled checks, see https://github.com/tommy-muehle/go-mnd/#checks for description.
+        checks: argument,case,condition,operation,return,assign # default argument,case,condition,operation,return,assign
+        ignored-numbers: 0,1 # default 0,1
   lll:
     line-length: 120 # default 120
   maligned:
@@ -78,7 +85,7 @@ linters:
     - structcheck
     - typecheck
     #- unused # false positives
-    #- varcheck # false positives
+    - varcheck
     ## disabled by default
     - bodyclose
     - dupl
@@ -91,17 +98,23 @@ linters:
     - gocyclo
     - goimports
     - golint
+    - gomnd
+    - goprintffuncname
     - gosec
     - lll
     - maligned
     - misspell
     - nakedret
     - prealloc
+    - rowserrcheck
     - scopelint
     - unconvert
     - unparam
     - whitespace
     - wsl
+
+output:
+  uniq-by-line: false # default true
 
 issues:
   max-issues-per-linter: 0
