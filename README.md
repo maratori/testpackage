@@ -24,7 +24,7 @@ More detailed articles on this topic:
 ## Usage
 
 The best way is to use [golangci-lint](https://github.com/golangci/golangci-lint).
-It includes **testpackage** linter started from v1.22.0 and higher.
+It includes **testpackage** linter started from v1.25.0 and higher.
 
 ### Install
 See [install section](https://github.com/golangci/golangci-lint#install) of readme.
@@ -90,6 +90,14 @@ Flags:  -V      print version and exit
 
 
 ## Changelog
+
+### [v1.0.1] - 2020-04-22
+
+#### Changed
+* No changes in linter behavior
+* Use latest go version on travis-ci
+* Update Makefile
+* Update golangci-lint
 
 ### [v1.0.0] - 2019-11-10
 
