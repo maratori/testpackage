@@ -1,3 +1,5 @@
 .idea/
 .DS_Store
-*.out
+coverage.out
+go.check.mod
+go.check.sum
