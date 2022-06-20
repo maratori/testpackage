@@ -27,6 +27,22 @@ func TestAnalyzer_Bad(t *testing.T) {
 	analysistest.Run(t, testdata, testpackage.NewAnalyzer())
 }
 
+func TestAnalyzer_Allowed(t *testing.T) {
+	analyzer := testpackage.NewAnalyzer()
+	err := analyzer.Flags.Set(testpackage.AllowPackagesFlagName, "allowed")
+
+	if err != nil {
+		t.FailNow()
+	}
+
+	testdata, err := filepath.Abs("testdata/allowed")
+	if err != nil {
+		t.FailNow()
+	}
+
+	analysistest.Run(t, testdata, analyzer)
+}
+
 func TestAnalyzer_InvalidRegexp(t *testing.T) {
 	invalid := `\Ca`
 	analyzer := testpackage.NewAnalyzer()
