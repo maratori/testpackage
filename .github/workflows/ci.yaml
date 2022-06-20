@@ -33,6 +33,12 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_ssh }}
         uses: mxschmitt/action-tmate@v3
 
-      - run: make ci
+      - run: make test-cover
 
       - uses: codecov/codecov-action@v2
+
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: "v1.46.2"
+
+      - run: make check-tidy
