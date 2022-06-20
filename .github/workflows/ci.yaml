@@ -1,0 +1,38 @@
+name: CI
+on:
+  workflow_dispatch:
+    inputs:
+      debug_ssh:
+        description: "Enable SSH debug with tmate, see https://github.com/marketplace/actions/debugging-with-tmate"
+        required: false
+        type: boolean
+        default: false
+  pull_request:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 0 * * 1" # Every Monday
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "1.x"
+
+      - name: Debug with tmate SSH if enabled
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_ssh }}
+        uses: mxschmitt/action-tmate@v3
+
+      - run: make ci
+
+      - uses: codecov/codecov-action@v2
