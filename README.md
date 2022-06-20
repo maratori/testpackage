@@ -54,7 +54,7 @@ golangci-lint run
 
 ### Install
 ```shell script
-go get -u github.com/maratori/testpackage
+go install github.com/maratori/testpackage
 ```
 
 ### Run
@@ -75,17 +75,27 @@ testpackage: linter that makes you use a separate _test package
 
 Usage: testpackage [-flag] [package]
 
-Flags:  -V      print version and exit
+
+Flags:
   -skip-regexp string
         regexp pattern to skip file by name. To not skip files use -skip-regexp="^$" (default "(export|internal)_test\\.go")
-  -json
-        emit JSON output
+  -V    print version and exit
   -c int
         display offending line with this many lines of context (default -1)
   -cpuprofile string
         write CPU profile to this file
+  -debug string
+        debug flags, any subset of "fpstv"
+  -fix
+        apply all suggested fixes
+  -flags
+        print analyzer flags in JSON
+  -json
+        emit JSON output
   -memprofile string
         write memory profile to this file
+  -trace string
+        write trace log to this file
 ```
 
 
