@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"strings"
 
+	"go/ast"
 	"golang.org/x/tools/go/analysis"
 )
 
@@ -20,12 +21,26 @@ const (
 	AllowPackagesFlagDefault = `main`
 )
 
+func processTestFile(pass *analysis.Pass, f *ast.File, allowedPackages []string) {
+	packageName := f.Name.Name
+
+	for _, p := range allowedPackages {
+		if p == packageName {
+			return
+		}
+	}
+
+	if !strings.HasSuffix(packageName, "_test") {
+		pass.Reportf(f.Name.Pos(), "package should be `%s_test` instead of `%s`", packageName, packageName)
+	}
+}
+
 // NewAnalyzer returns Analyzer that makes you use a separate _test package.
 func NewAnalyzer() *analysis.Analyzer {
 	var (
-		skipFileRegexp = SkipRegexpFlagDefault
+		skipFileRegexp   = SkipRegexpFlagDefault
 		allowPackagesStr = AllowPackagesFlagDefault
-		fs             flag.FlagSet
+		fs                 flag.FlagSet
 	)
 
 	fs.StringVar(&skipFileRegexp, SkipRegexpFlagName, skipFileRegexp, SkipRegexpFlagUsage)
@@ -44,28 +59,12 @@ func NewAnalyzer() *analysis.Analyzer {
 
 			for _, f := range pass.Files {
 				fileName := pass.Fset.Position(f.Pos()).Filename
-				if skipFile.MatchString(fileName) {
+				if !strings.HasSuffix(fileName, "_test.go") || skipFile.MatchString(fileName) {
 					continue
 				}
 
-				if strings.HasSuffix(fileName, "_test.go") {
-					packageName := f.Name.Name
 
-					allowedPackage := false
-					for _, p := range allowedPackages {
-						if p == packageName {
-							allowedPackage = true
-						}
-					}
-
-					if allowedPackage {
-						continue
-					}
-
-					if !strings.HasSuffix(packageName, "_test") {
-						pass.Reportf(f.Name.Pos(), "package should be `%s_test` instead of `%s`", packageName, packageName)
-					}
-				}
+				processTestFile(pass, f, allowedPackages)
 			}
 
 			return nil, nil
