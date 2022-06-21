@@ -37,11 +37,15 @@ linters:
     testpackage
 ```
 
-You can also change regexp that is used to ignore files by the linter. Here is the default value.
+You can also change the regexp that is used to ignore files by the linter,
+and the list of packages that are allowed by default.
+
+Here are the default values:
 ```yaml
 linters-settings:
   testpackage:
     skip-regexp: (export|internal)_test\.go
+    allow-packages: main
 ```
 
 ### Run
@@ -79,6 +83,8 @@ Usage: testpackage [-flag] [package]
 Flags:
   -skip-regexp string
         regexp pattern to skip file by name. To not skip files use -skip-regexp="^$" (default "(export|internal)_test\\.go")
+  -allow-packages string
+        comma separated list of packages that don't end with _test that tests are allowed to be in
   -V    print version and exit
   -c int
         display offending line with this many lines of context (default -1)
