@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"go/ast"
+
 	"golang.org/x/tools/go/analysis"
 )
 
@@ -40,7 +41,7 @@ func NewAnalyzer() *analysis.Analyzer {
 	var (
 		skipFileRegexp   = SkipRegexpFlagDefault
 		allowPackagesStr = AllowPackagesFlagDefault
-		fs                 flag.FlagSet
+		fs               flag.FlagSet
 	)
 
 	fs.StringVar(&skipFileRegexp, SkipRegexpFlagName, skipFileRegexp, SkipRegexpFlagUsage)
@@ -62,7 +63,6 @@ func NewAnalyzer() *analysis.Analyzer {
 				if !strings.HasSuffix(fileName, "_test.go") || skipFile.MatchString(fileName) {
 					continue
 				}
-
 
 				processTestFile(pass, f, allowedPackages)
 			}
