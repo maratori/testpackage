@@ -35,7 +35,7 @@ jobs:
 
       - run: make test-cover
 
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
 
       - uses: golangci/golangci-lint-action@v3
         with:
