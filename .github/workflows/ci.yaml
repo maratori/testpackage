@@ -19,26 +19,36 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
-    name: CI
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - uses: actions/setup-go@v3
         with:
           go-version: "1.x"
-
       - name: Debug with tmate SSH if enabled
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_ssh }}
         uses: mxschmitt/action-tmate@v3
-
       - run: make test-cover
-
       - uses: codecov/codecov-action@v3
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "1.x"
       - uses: golangci/golangci-lint-action@v3
         with:
           version: "v1.46.2"
 
+  check-tidy:
+    name: go mod tidy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "1.x"
       - run: make check-tidy
