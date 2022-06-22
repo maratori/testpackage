@@ -1,4 +1,4 @@
-# testpackage <br> [![CI](https://github.com/maratori/testpackage/actions/workflows/ci.yaml/badge.svg)](https://github.com/maratori/testpackage/actions/workflows/ci.yaml) [![codecov](https://codecov.io/gh/maratori/testpackage/branch/master/graph/badge.svg)](https://codecov.io/gh/maratori/testpackage) [![codebeat badge](https://codebeat.co/badges/9c74d700-ebf8-4b76-8405-1950874576c4)](https://codebeat.co/projects/github-com-maratori-testpackage-master) [![Maintainability](https://api.codeclimate.com/v1/badges/bf753d7560c8e4aa5cf0/maintainability)](https://codeclimate.com/github/maratori/testpackage/maintainability) [![Go Report Card](https://goreportcard.com/badge/github.com/maratori/testpackage)](https://goreportcard.com/report/github.com/maratori/testpackage) [![GitHub](https://img.shields.io/github/license/maratori/testpackage.svg)](LICENSE) [![GoDoc](https://godoc.org/github.com/maratori/testpackage?status.svg)](http://pkg.go.dev/github.com/maratori/testpackage)
+# testpackage <br> [![CI][ci-img]][ci-link] [![Codecov][codecov-img]][codecov-link] [![Codebeat][codebeat-img]][codebeat-link] [![Maintainability][codeclimate-img]][codeclimate-link] [![Go Report Card][goreportcard-img]][goreportcard-link] [![License][license-img]][license-link] [![Go Reference][godoc-img]][godoc-link]
 
 **testpackage** is a golang linter that makes you use a separate `_test` package.
 
@@ -23,11 +23,10 @@ More detailed articles on this topic:
 
 ## Usage
 
-The best way is to use [golangci-lint](https://github.com/golangci/golangci-lint).
-It includes **testpackage** linter started from v1.25.0 and higher.
+The best way is to use [golangci-lint](https://golangci-lint.run/). It includes [testpackage](https://golangci-lint.run/usage/linters/#list-item-testpackage) and a lot of other great linters.
 
 ### Install
-See [install section](https://github.com/golangci/golangci-lint#install) of readme.
+See [official site](https://golangci-lint.run/usage/install/).
 
 ### Configuration
 **testpackage** is disabled by default. To enable it, add the following to your `.golangci.yml`:
@@ -45,14 +44,14 @@ Here are the default values:
 linters-settings:
   testpackage:
     skip-regexp: (export|internal)_test\.go
-    allow-packages: main
+    allow-packages:
+      - main
 ```
 
 ### Run
 ```shell script
 golangci-lint run
 ```
-
 
 ## Usage as standalone linter
 
@@ -84,7 +83,7 @@ Flags:
   -skip-regexp string
         regexp pattern to skip file by name. To not skip files use -skip-regexp="^$" (default "(export|internal)_test\\.go")
   -allow-packages string
-        comma separated list of packages that don't end with _test that tests are allowed to be in
+        comma separated list of packages that don't end with _test that tests are allowed to be in (default "main")
   -V    print version and exit
   -c int
         display offending line with this many lines of context (default -1)
@@ -100,12 +99,25 @@ Flags:
         emit JSON output
   -memprofile string
         write memory profile to this file
+  -test
+        indicates whether test files should be analyzed, too (default true)
   -trace string
         write trace log to this file
 ```
 
+## Contributors
+* [maratori](https://github.com/maratori)
+* [G-Rath](https://github.com/G-Rath)
 
 ## Changelog
+
+### [v1.1.0] - 2022-06-22
+
+#### Changed
+* Allow tests in `main` package by default and add flag `-allow-packages` to allow tests without `_test` suffix (thanks [G-Rath](https://github.com/G-Rath))
+* Update golang to 1.18
+* Migrate to [github actions](https://github.com/maratori/testpackage/actions/workflows/ci.yaml) from travis-ci
+* Update golangci-lint to v1.46.2
 
 ### [v1.0.1] - 2020-04-22
 
@@ -119,5 +131,21 @@ Flags:
 
 #### Added
 * Go Analyzer to check the name of test package
-* main.go to run the analyzer
+* `main.go` to run the analyzer
 * MIT [license](LICENSE)
+
+
+[ci-img]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml/badge.svg
+[ci-link]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml
+[codecov-img]: https://codecov.io/gh/maratori/testpackage/branch/main/graph/badge.svg?token=Pa334H8xEh
+[codecov-link]: https://codecov.io/gh/maratori/testpackage
+[codebeat-img]: https://codebeat.co/badges/c5ab864e-dbe5-424a-93ae-75ad98c1ea55
+[codebeat-link]: https://codebeat.co/projects/github-com-maratori-testpackage-main
+[codeclimate-img]: https://api.codeclimate.com/v1/badges/bf753d7560c8e4aa5cf0/maintainability
+[codeclimate-link]: https://codeclimate.com/github/maratori/testpackage/maintainability
+[goreportcard-img]: https://goreportcard.com/badge/github.com/maratori/testpackage
+[goreportcard-link]: https://goreportcard.com/report/github.com/maratori/testpackage
+[license-img]: https://img.shields.io/github/license/maratori/testpackage.svg
+[license-link]: /LICENSE
+[godoc-img]: https://pkg.go.dev/badge/github.com/maratori/testpackage.svg
+[godoc-link]: https://pkg.go.dev/github.com/maratori/testpackage
