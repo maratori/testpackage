@@ -2,6 +2,7 @@ package testpackage
 
 import (
 	"flag"
+	"fmt"
 	"regexp"
 	"strings"
 
@@ -32,7 +33,22 @@ func processTestFile(pass *analysis.Pass, f *ast.File, allowedPackages []string)
 	}
 
 	if !strings.HasSuffix(packageName, "_test") {
-		pass.Reportf(f.Name.Pos(), "package should be `%s_test` instead of `%s`", packageName, packageName)
+		pass.Report(analysis.Diagnostic{
+			Pos:     f.Name.Pos(),
+			Message: fmt.Sprintf("package should be `%s_test` instead of `%s`", packageName, packageName),
+			SuggestedFixes: []analysis.SuggestedFix{
+				{
+					Message: fmt.Sprintf("replace `%s` with `%s_test`", packageName, packageName),
+					TextEdits: []analysis.TextEdit{
+						{
+							Pos:     f.Name.Pos(),
+							End:     f.Name.End(),
+							NewText: []byte(fmt.Sprintf("%s_test", packageName)),
+						},
+					},
+				},
+			},
+		})
 	}
 }
 

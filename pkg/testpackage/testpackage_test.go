@@ -27,6 +27,15 @@ func TestAnalyzer_Bad(t *testing.T) {
 	analysistest.Run(t, testdata, testpackage.NewAnalyzer())
 }
 
+func TestAnalyzer_Bad_Fixed(t *testing.T) {
+	testdata, err := filepath.Abs("testdata/bad")
+	if err != nil {
+		t.FailNow()
+	}
+
+	analysistest.RunWithSuggestedFixes(t, testdata, testpackage.NewAnalyzer())
+}
+
 func TestAnalyzer_Allowed(t *testing.T) {
 	analyzer := testpackage.NewAnalyzer()
 	err := analyzer.Flags.Set(testpackage.AllowPackagesFlagName, "allowed")
