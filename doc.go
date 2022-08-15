@@ -1,7 +1,7 @@
 /*
 testpackage is golang linter that makes you use a separate `_test` package.
 
-Motivation
+# Motivation
 
 According to blackbox testing approach, you should not use unexported functions and methods from source code in tests.
 
@@ -15,9 +15,9 @@ The linter skips such files by default.
 It also skips the file `export_test.go` by default (see the last article below).
 
 More detailed articles on this topic:
- * Next level Go testing by Tit Petric https://scene-si.org/2019/04/15/next-level-go-testing#public-vs-private-tests-apis
- * 5 simple tips and tricks for writing unit tests in #golang by Mat Ryer https://medium.com/@matryer/5-simple-tips-and-tricks-for-writing-unit-tests-in-golang-619653f90742
- * 5 advanced testing techniques in Go by Alan Braithwaite https://segment.com/blog/5-advanced-testing-techniques-in-go/#use-a-separate-test-package
- * Golang Trick: Export unexport method for test by lysu https://medium.com/@robiplus/golang-trick-export-for-test-aa16cbd7b8cd
+  - Next level Go testing by Tit Petric https://scene-si.org/2019/04/15/next-level-go-testing#public-vs-private-tests-apis
+  - 5 simple tips and tricks for writing unit tests in #golang by Mat Ryer https://medium.com/@matryer/5-simple-tips-and-tricks-for-writing-unit-tests-in-golang-619653f90742
+  - 5 advanced testing techniques in Go by Alan Braithwaite https://segment.com/blog/5-advanced-testing-techniques-in-go/#use-a-separate-test-package
+  - Golang Trick: Export unexport method for test by lysu https://medium.com/@robiplus/golang-trick-export-for-test-aa16cbd7b8cd
 */
 package main
