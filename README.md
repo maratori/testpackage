@@ -1,4 +1,4 @@
-# testpackage <br> [![CI][ci-img]][ci-link] [![Codecov][codecov-img]][codecov-link] [![Codebeat][codebeat-img]][codebeat-link] [![Maintainability][codeclimate-img]][codeclimate-link] [![Go Report Card][goreportcard-img]][goreportcard-link] [![License][license-img]][license-link] [![Go Reference][godoc-img]][godoc-link]
+# testpackage <br> [![go.mod version][go-img]][go-url] [![CI][ci-img]][ci-url] [![Codecov][codecov-img]][codecov-url] [![Codebeat][codebeat-img]][codebeat-url] [![Maintainability][codeclimate-img]][codeclimate-url] [![Go Report Card][goreportcard-img]][goreportcard-url] [![License][license-img]][license-url] [![Go Reference][godoc-img]][godoc-url]
 
 **testpackage** is a golang linter that makes you use a separate `_test` package.
 
@@ -135,17 +135,19 @@ Flags:
 * MIT [license](LICENSE)
 
 
+[go-img]: https://img.shields.io/github/go-mod/go-version/maratori/testpackage
+[go-url]: /go.mod
 [ci-img]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml/badge.svg
-[ci-link]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml
+[ci-url]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml
 [codecov-img]: https://codecov.io/gh/maratori/testpackage/branch/main/graph/badge.svg?token=Pa334H8xEh
-[codecov-link]: https://codecov.io/gh/maratori/testpackage
+[codecov-url]: https://codecov.io/gh/maratori/testpackage
 [codebeat-img]: https://codebeat.co/badges/c5ab864e-dbe5-424a-93ae-75ad98c1ea55
-[codebeat-link]: https://codebeat.co/projects/github-com-maratori-testpackage-main
+[codebeat-url]: https://codebeat.co/projects/github-com-maratori-testpackage-main
 [codeclimate-img]: https://api.codeclimate.com/v1/badges/bf753d7560c8e4aa5cf0/maintainability
-[codeclimate-link]: https://codeclimate.com/github/maratori/testpackage/maintainability
+[codeclimate-url]: https://codeclimate.com/github/maratori/testpackage/maintainability
 [goreportcard-img]: https://goreportcard.com/badge/github.com/maratori/testpackage
-[goreportcard-link]: https://goreportcard.com/report/github.com/maratori/testpackage
+[goreportcard-url]: https://goreportcard.com/report/github.com/maratori/testpackage
 [license-img]: https://img.shields.io/github/license/maratori/testpackage.svg
-[license-link]: /LICENSE
+[license-url]: /LICENSE
 [godoc-img]: https://pkg.go.dev/badge/github.com/maratori/testpackage.svg
-[godoc-link]: https://pkg.go.dev/github.com/maratori/testpackage
+[godoc-url]: https://pkg.go.dev/github.com/maratori/testpackage
