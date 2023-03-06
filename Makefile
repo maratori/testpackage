@@ -1,24 +1,35 @@
-ci: test lint check-tidy
-.PHONY: ci
+help: ## show this message
+	@echo "All commands can be run on local machine as well as inside dev container."
+	@echo ""
+	@sed -nE 's/^ *([^[:blank:]]+)[[:blank:]]*:[^#]*##[[:blank:]]*(.+)/\1\n\2/p' $(MAKEFILE_LIST) | tr '\n' '\0' | xargs -0 -n 2 printf '%-25s%s\n'
+.PHONY: help
 
-test:
-	go test -race ./...
+.DEFAULT_GOAL := help
+
+test: ## run all tests
+	@echo "+ $@"
+	go test -race -count 1 -p 8 -parallel 8 -timeout 1m ./...
 .PHONY: test
 
-lint:
-	docker run --rm --name lint -v `pwd`:/app -w /app golangci/golangci-lint:v1.48.0 golangci-lint run
+test-cover: ## run all tests with code coverage
+	@echo "+ $@"
+	go test -race -count 1 -p 8 -parallel 8 -timeout 1m -coverpkg ./... -coverprofile coverage.out ./...
+.PHONY: test-cover
+
+lint: build-docker-dev ## run linter
+	@echo "+ $@"
+	$(RUN_IN_DOCKER) golangci-lint run
 .PHONY: lint
 
-tidy:
-	go mod tidy
-.PHONY: tidy
+bash: build-docker-dev ## run bash inside container for development
+ ifndef INSIDE_DEV_CONTAINER
+	@echo "+ $@"
+	$(RUN_IN_DOCKER) bash
+ endif
+.PHONY: bash
 
-update-deps:
-	go get -u -t ./...
-	go mod tidy
-.PHONY: update-deps
-
-check-tidy:
+check-tidy: ## ensure go.mod is tidy
+	@echo "+ $@"
 	cp go.mod go.check.mod
 	cp go.sum go.check.sum
 	go mod tidy -modfile=go.check.mod
@@ -27,6 +38,17 @@ check-tidy:
 	rm go.check.mod go.check.sum
 .PHONY: check-tidy
 
-test-cover:
-	go test -race -coverpkg ./... -coverprofile=coverage.out ./...
-.PHONY: test-cover
+build-docker-dev: ## build development image from Dockerfile.dev
+ ifndef INSIDE_DEV_CONTAINER
+	@echo "+ $@"
+	DOCKER_BUILDKIT=1 docker build --tag pairedbrackets:dev - < Dockerfile.dev
+ endif
+.PHONY: build-docker-dev
+
+ifndef INSIDE_DEV_CONTAINER
+  RUN_IN_DOCKER = docker run --rm                                                                \
+                             -it                                                                 \
+                             -w /app                                                             \
+                             --mount type=bind,consistency=delegated,source="`pwd`",target=/app  \
+                             pairedbrackets:dev
+endif
