@@ -111,6 +111,14 @@ Flags:
 
 ## Changelog
 
+### [v1.1.1] - 2023-03-07
+
+#### Changed
+* Update golang to 1.20
+* Update dependencies
+* Update golangci-lint to v1.51.2
+* Update Makefile
+
 ### [v1.1.0] - 2022-06-22
 
 #### Changed
