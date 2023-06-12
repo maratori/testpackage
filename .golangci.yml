@@ -209,6 +209,7 @@ linters:
     - lll # reports long lines
     - loggercheck # checks key value pairs for common logger libraries (kitlog,klog,logr,zap)
     - makezero # finds slice declarations with non-zero initial length
+    - mirror # reports wrong mirror patterns of bytes/strings usage
     - musttag # enforces field tags in (un)marshaled structs
     - nakedret # finds naked returns in functions greater than a specified function length
     - nestif # reports deeply nested if statements
@@ -245,8 +246,10 @@ linters:
     #- interfacebloat # checks the number of methods inside an interface
     #- ireturn # accept interfaces, return concrete types
     #- prealloc # [premature optimization, but can be used in some cases] finds slice declarations that could potentially be preallocated
+    #- tagalign # checks that struct tags are well aligned
     #- varnamelen # [great idea, but too many false positives] checks that the length of a variable's name matches its scope
     #- wrapcheck # checks that errors returned from external packages are wrapped
+    #- zerologlint # detects the wrong usage of zerolog that a user forgets to dispatch zerolog.Event
 
     ## disabled
     #- containedctx # detects struct contained context.Context field
@@ -259,6 +262,7 @@ linters:
     #- goerr113 # [too strict] checks the errors handling expressions
     #- gofmt # [replaced by goimports] checks whether code was gofmt-ed
     #- gofumpt # [replaced by goimports, gofumports is not available yet] checks whether code was gofumpt-ed
+    #- gosmopolitan # reports certain i18n/l10n anti-patterns in your Go codebase
     #- grouper # analyzes expression groups
     #- importas # enforces consistent import aliases
     #- maintidx # measures the maintainability index of each function
