@@ -67,6 +67,9 @@ linters-settings:
     # If lower than 0, disable the check.
     # Default: 40
     statements: 50
+    # Ignore comments when counting lines.
+    # Default false
+    ignore-comments: true
 
   gocognit:
     # Minimal code complexity to report.
