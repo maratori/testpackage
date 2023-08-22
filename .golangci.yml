@@ -97,13 +97,16 @@ linters-settings:
     # `strconv.ParseInt`, `strconv.ParseUint`, `strconv.ParseFloat`.
     # Default: []
     ignored-functions:
+      - flag.Arg
+      - flag.Duration.*
+      - flag.Float.*
+      - flag.Int.*
+      - flag.Uint.*
       - os.Chmod
-      - os.Mkdir
-      - os.MkdirAll
+      - os.Mkdir.*
       - os.OpenFile
       - os.WriteFile
-      - prometheus.ExponentialBuckets
-      - prometheus.ExponentialBucketsRange
+      - prometheus.ExponentialBuckets.*
       - prometheus.LinearBuckets
 
   gomodguard:
