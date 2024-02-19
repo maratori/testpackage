@@ -41,7 +41,7 @@ jobs:
           go-version: "1.22.0" # update together with Dockerfile.dev
       - uses: golangci/golangci-lint-action@v4
         with:
-          version: "v1.55.2" # update together with Dockerfile.dev
+          version: "v1.56.2" # update together with Dockerfile.dev
 
   check-tidy:
     name: go mod tidy
