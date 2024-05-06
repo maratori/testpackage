@@ -41,7 +41,7 @@ check-tidy: ## ensure go.mod is tidy
 build-docker-dev: ## build development image from Dockerfile.dev
  ifndef INSIDE_DEV_CONTAINER
 	@echo "+ $@"
-	DOCKER_BUILDKIT=1 docker build --tag pairedbrackets:dev - < Dockerfile.dev
+	DOCKER_BUILDKIT=1 docker build --tag testpackege:dev - < Dockerfile.dev
  endif
 .PHONY: build-docker-dev
 
@@ -50,5 +50,5 @@ ifndef INSIDE_DEV_CONTAINER
                              -it                                                                 \
                              -w /app                                                             \
                              --mount type=bind,consistency=delegated,source="`pwd`",target=/app  \
-                             pairedbrackets:dev
+                             testpackege:dev
 endif

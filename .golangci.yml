@@ -91,25 +91,6 @@ linters-settings:
         # Default: true
         skipRecvDeref: false
 
-  gomnd:
-    # List of function patterns to exclude from analysis.
-    # Values always ignored: `time.Date`,
-    # `strconv.FormatInt`, `strconv.FormatUint`, `strconv.FormatFloat`,
-    # `strconv.ParseInt`, `strconv.ParseUint`, `strconv.ParseFloat`.
-    # Default: []
-    ignored-functions:
-      - flag.Arg
-      - flag.Duration.*
-      - flag.Float.*
-      - flag.Int.*
-      - flag.Uint.*
-      - os.Chmod
-      - os.Mkdir.*
-      - os.OpenFile
-      - os.WriteFile
-      - prometheus.ExponentialBuckets.*
-      - prometheus.LinearBuckets
-
   gomodguard:
     blocked:
       # List of blocked modules.
@@ -125,8 +106,8 @@ linters-settings:
             reason: "satori's package is not maintained"
         - github.com/gofrs/uuid:
             recommendations:
-              - github.com/google/uuid
-            reason: "gofrs' package is not go module"
+              - github.com/gofrs/uuid/v5
+            reason: "gofrs' package was not go module before v5"
 
   govet:
     # Enable all analyzers.
@@ -148,6 +129,26 @@ linters-settings:
     # Skips check for interface methods with only a single parameter.
     # Default: false
     skip-single-param: true
+
+  mnd:
+    # List of function patterns to exclude from analysis.
+    # Values always ignored: `time.Date`,
+    # `strconv.FormatInt`, `strconv.FormatUint`, `strconv.FormatFloat`,
+    # `strconv.ParseInt`, `strconv.ParseUint`, `strconv.ParseFloat`.
+    # Default: []
+    ignored-functions:
+      - args.Error
+      - flag.Arg
+      - flag.Duration.*
+      - flag.Float.*
+      - flag.Int.*
+      - flag.Uint.*
+      - os.Chmod
+      - os.Mkdir.*
+      - os.OpenFile
+      - os.WriteFile
+      - prometheus.ExponentialBuckets.*
+      - prometheus.LinearBuckets
 
   nakedret:
     # Make an issue if func has more lines of code than this setting, and it has naked returns.
@@ -176,6 +177,22 @@ linters-settings:
     packages:
       - github.com/jmoiron/sqlx
 
+  sloglint:
+    # Enforce not using global loggers.
+    # Values:
+    # - "": disabled
+    # - "all": report all global loggers
+    # - "default": report only the default slog logger
+    # Default: ""
+    no-global: "all"
+    # Enforce using methods that accept a context.
+    # Values:
+    # - "": disabled
+    # - "all": report all contextless calls
+    # - "scope": report only if a context exists in the scope of the outermost function
+    # Default: ""
+    context: "scope"
+
   tenv:
     # The option `all` will run against whole test files (`_test.go`) regardless of method/function signatures.
     # Otherwise, only methods that take `*testing.T`, `*testing.B`, and `testing.TB` as arguments are checked.
@@ -199,15 +216,16 @@ linters:
     - asciicheck # checks that your code does not contain non-ASCII identifiers
     - bidichk # checks for dangerous unicode character sequences
     - bodyclose # checks whether HTTP response body is closed successfully
+    - canonicalheader # checks whether net/http.Header uses canonical header
     - copyloopvar # detects places where loop variables are copied
     - cyclop # checks function and package cyclomatic complexity
     - dupl # tool for code clone detection
     - durationcheck # checks for two durations multiplied together
     - errname # checks that sentinel errors are prefixed with the Err and error types are suffixed with the Error
     - errorlint # finds code that will cause problems with the error wrapping scheme introduced in Go 1.13
-    - execinquery # checks query string in Query function which reads your Go src files and warning it finds
     - exhaustive # checks exhaustiveness of enum switch statements
     - exportloopref # checks for pointers to enclosing loop variables
+    - fatcontext # detects nested contexts in loops
     - forbidigo # forbids identifiers
     - funlen # tool for detection of long functions
     - gocheckcompilerdirectives # validates go compiler directive comments (//go:)
@@ -220,7 +238,6 @@ linters:
     - gocyclo # computes and checks the cyclomatic complexity of functions
     - godot # checks if comments end in a period
     - goimports # in addition to fixing imports, goimports also formats your code in the same style as gofmt
-    - gomnd # detects magic numbers
     - gomoddirectives # manages the use of 'replace', 'retract', and 'excludes' directives in go.mod
     - gomodguard # allow and block lists linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations
     - goprintffuncname # checks that printf-like functions are named with f at the end
@@ -230,6 +247,7 @@ linters:
     - loggercheck # checks key value pairs for common logger libraries (kitlog,klog,logr,zap)
     - makezero # finds slice declarations with non-zero initial length
     - mirror # reports wrong mirror patterns of bytes/strings usage
+    - mnd # detects magic numbers
     - musttag # enforces field tags in (un)marshaled structs
     - nakedret # finds naked returns in functions greater than a specified function length
     - nestif # reports deeply nested if statements
@@ -283,9 +301,10 @@ linters:
     #- depguard # [replaced by gomodguard] checks if package imports are in a list of acceptable packages
     #- dogsled # checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())
     #- dupword # [useless without config] checks for duplicate words in the source code
+    #- err113 # [too strict] checks the errors handling expressions
     #- errchkjson # [don't see profit + I'm against of omitting errors like in the first example https://github.com/breml/errchkjson] checks types passed to the json encoding functions. Reports unsupported types and optionally reports occasions, where the check for the returned error can be omitted
+    #- execinquery # [deprecated] checks query string in Query function which reads your Go src files and warning it finds
     #- forcetypeassert # [replaced by errcheck] finds forced type assertions
-    #- goerr113 # [too strict] checks the errors handling expressions
     #- gofmt # [replaced by goimports] checks whether code was gofmt-ed
     #- gofumpt # [replaced by goimports, gofumports is not available yet] checks whether code was gofumpt-ed
     #- gosmopolitan # reports certain i18n/l10n anti-patterns in your Go codebase
