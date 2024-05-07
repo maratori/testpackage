@@ -2,7 +2,7 @@ module github.com/maratori/testpackage
 
 go 1.22
 
-require golang.org/x/tools v0.20.0
+require golang.org/x/tools v0.21.0
 
 require (
 	golang.org/x/mod v0.17.0 // indirect
