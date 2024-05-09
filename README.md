@@ -1,4 +1,4 @@
-# testpackage <br> [![go.mod version][go-img]][go-url] [![CI][ci-img]][ci-url] [![Codecov][codecov-img]][codecov-url] [![Codebeat][codebeat-img]][codebeat-url] [![Maintainability][codeclimate-img]][codeclimate-url] [![Go Report Card][goreportcard-img]][goreportcard-url] [![License][license-img]][license-url] [![Go Reference][godoc-img]][godoc-url]
+# testpackage <br> [![go minimal version][go-img]][go-url] [![go tested version][go-latest-img]][go-latest-url] [![CI][ci-img]][ci-url] [![Codecov][codecov-img]][codecov-url] [![Codebeat][codebeat-img]][codebeat-url] [![Maintainability][codeclimate-img]][codeclimate-url] [![Go Report Card][goreportcard-img]][goreportcard-url] [![License][license-img]][license-url] [![Go Reference][godoc-img]][godoc-url]
 
 **testpackage** is a golang linter that makes you use a separate `_test` package.
 
@@ -145,6 +145,8 @@ Flags:
 
 [go-img]: https://img.shields.io/github/go-mod/go-version/maratori/testpackage
 [go-url]: /go.mod
+[go-latest-img]: https://img.shields.io/github/go-mod/go-version/maratori/testpackage?filename=.github%2Flatest-deps%2Fgo.mod&label=tested
+[go-latest-url]: /.github/latest-deps/go.mod
 [ci-img]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml/badge.svg
 [ci-url]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml
 [codecov-img]: https://codecov.io/gh/maratori/testpackage/branch/main/graph/badge.svg?token=Pa334H8xEh

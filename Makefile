@@ -16,6 +16,11 @@ test-cover: ## run all tests with code coverage
 	go test -race -count 1 -p 8 -parallel 8 -timeout 1m -coverpkg ./... -coverprofile coverage.out ./...
 .PHONY: test-cover
 
+test-latest-deps: ## run all tests with latest dependencies
+	@echo "+ $@"
+	go test -modfile .github/latest-deps/go.mod -race -p 8 -parallel 8 -timeout 1m ./...
+.PHONY: test
+
 lint: build-docker-dev ## run linter
 	@echo "+ $@"
 	$(RUN_IN_DOCKER) golangci-lint run
@@ -28,6 +33,15 @@ bash: build-docker-dev ## run bash inside container for development
  endif
 .PHONY: bash
 
+IMPORTS = find . -name '*.go' -not -path './.github/*' -exec sed -e '/^import (/,/^)/!d' {} + | sed -e '/\./!d' | grep -v "`head -n 1 go.mod | sed -e 's/module //'`" | sed -E -e 's/\t(.+ )?"/\t_ "/' | sort | uniq | xargs -0 printf 'package imports\n\nimport (\n%s)\n'
+
+tidy: ## keep go.mod and .github/latest-deps tidy
+	@echo "+ $@"
+	go mod tidy
+	$(IMPORTS) > .github/latest-deps/imports.go
+	go mod tidy -modfile=.github/latest-deps/go.mod
+.PHONY: check
+
 check-tidy: ## ensure go.mod is tidy
 	@echo "+ $@"
 	cp go.mod go.check.mod
@@ -35,6 +49,17 @@ check-tidy: ## ensure go.mod is tidy
 	go mod tidy -modfile=go.check.mod
 	diff -u go.mod go.check.mod
 	diff -u go.sum go.check.sum
+	rm go.check.mod go.check.sum
+
+	$(IMPORTS) > .github/latest-deps/imports.check.go
+	diff -u .github/latest-deps/imports.go .github/latest-deps/imports.check.go
+	rm .github/latest-deps/imports.check.go
+
+	cp .github/latest-deps/go.mod go.check.mod
+	cp .github/latest-deps/go.sum go.check.sum
+	go mod tidy -modfile=go.check.mod
+	diff -u .github/latest-deps/go.mod go.check.mod
+	diff -u .github/latest-deps/go.sum go.check.sum
 	rm go.check.mod go.check.sum
 .PHONY: check-tidy
 
