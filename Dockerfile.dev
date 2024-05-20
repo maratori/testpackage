@@ -2,7 +2,7 @@
 FROM golang:1.22.3 AS go
 
 # update together with .github/workflows/ci.yml
-FROM golangci/golangci-lint:v1.58.1 AS linter
+FROM golangci/golangci-lint:v1.58.2 AS linter
 
 FROM go AS dev
 ENV INSIDE_DEV_CONTAINER 1
