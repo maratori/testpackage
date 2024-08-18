@@ -1,6 +1,6 @@
 module github.com/maratori/testpackage
 
-go 1.22
+go 1.23
 
 require golang.org/x/tools v0.24.0
 

@@ -44,23 +44,13 @@ tidy: ## keep go.mod and .github/latest-deps tidy
 
 check-tidy: ## ensure go.mod is tidy
 	@echo "+ $@"
-	cp go.mod go.check.mod
-	cp go.sum go.check.sum
-	go mod tidy -modfile=go.check.mod
-	diff -u go.mod go.check.mod
-	diff -u go.sum go.check.sum
-	rm go.check.mod go.check.sum
+	go mod tidy -diff
 
 	$(IMPORTS) > .github/latest-deps/imports.check.go
 	diff -u .github/latest-deps/imports.go .github/latest-deps/imports.check.go
 	rm .github/latest-deps/imports.check.go
 
-	cp .github/latest-deps/go.mod go.check.mod
-	cp .github/latest-deps/go.sum go.check.sum
-	go mod tidy -modfile=go.check.mod
-	diff -u .github/latest-deps/go.mod go.check.mod
-	diff -u .github/latest-deps/go.sum go.check.sum
-	rm go.check.mod go.check.sum
+	go mod tidy -diff -modfile=.github/latest-deps/go.mod
 .PHONY: check-tidy
 
 build-docker-dev: ## build development image from Dockerfile.dev
