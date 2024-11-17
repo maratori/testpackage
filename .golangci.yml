@@ -176,6 +176,13 @@ linters-settings:
     # Default: true
     strconcat: false
 
+  reassign:
+    # Patterns for global variable names that are checked for reassignment.
+    # See https://github.com/curioswitch/go-reassign#usage
+    # Default: ["EOF", "Err.*"]
+    patterns:
+      - ".*"
+
   rowserrcheck:
     # database/sql is always checked
     # Default: []
