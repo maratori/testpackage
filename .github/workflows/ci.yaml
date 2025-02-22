@@ -55,6 +55,20 @@ jobs:
           verify: true
           version: "v1.64.5" # update together with Dockerfile.dev
 
+  lint-latest-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: use latest go.mod
+        run: cp .github/latest-deps/go.mod go.mod && cp .github/latest-deps/go.sum go.sum
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.0" # update together with Dockerfile.dev
+      - uses: golangci/golangci-lint-action@v6
+        with:
+          verify: true
+          version: "v1.64.5" # update together with Dockerfile.dev
+
   check-tidy:
     name: go mod tidy
     runs-on: ubuntu-latest
