@@ -53,7 +53,7 @@ jobs:
       - uses: golangci/golangci-lint-action@v6
         with:
           verify: true
-          version: "v1.64.5" # update together with Dockerfile.dev
+          version: "v1.64.6" # update together with Dockerfile.dev
 
   lint-latest-deps:
     runs-on: ubuntu-latest
@@ -67,7 +67,7 @@ jobs:
       - uses: golangci/golangci-lint-action@v6
         with:
           verify: true
-          version: "v1.64.5" # update together with Dockerfile.dev
+          version: "v1.64.6" # update together with Dockerfile.dev
 
   check-tidy:
     name: go mod tidy
