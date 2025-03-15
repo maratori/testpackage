@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.24.1" # update together with Dockerfile.dev
+          go-version: "1.24.1" # update together with dev.dockerfile
       - name: Debug with tmate SSH if enabled
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_ssh }}
         uses: mxschmitt/action-tmate@v3
@@ -49,25 +49,22 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.24.1" # update together with Dockerfile.dev
+          go-version: "1.24.1" # update together with dev.dockerfile
       - uses: golangci/golangci-lint-action@v6
         with:
-          verify: true
-          version: "v1.64.7" # update together with Dockerfile.dev
+          version: "v1.64.7" # update together with dev.dockerfile
 
   lint-latest-deps:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: use latest go.mod
-        run: cp .github/latest-deps/go.mod go.mod && cp .github/latest-deps/go.sum go.sum
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.24.1" # update together with Dockerfile.dev
+          go-version: "1.24.1" # update together with dev.dockerfile
+      - run: make apply-latest-deps
       - uses: golangci/golangci-lint-action@v6
         with:
-          verify: true
-          version: "v1.64.7" # update together with Dockerfile.dev
+          version: "v1.64.7" # update together with dev.dockerfile
 
   check-tidy:
     name: go mod tidy
@@ -76,7 +73,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.24.1" # update together with Dockerfile.dev
+          go-version: "1.24.1" # update together with dev.dockerfile
       - run: make check-tidy
 
   typos:

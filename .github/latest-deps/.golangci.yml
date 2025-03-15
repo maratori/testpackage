@@ -1,0 +1,5 @@
+# This file specifies the exclusions needed for compatibility with older Go versions and dependencies.
+# It is merged with the main .golangci.yml file to run the linter using the latest dependencies and go.mod.
+issues:
+  exclude-rules:
+    # patch for latest deps
