@@ -26,6 +26,26 @@ lint: build-docker-dev ## run linter
 	$(RUN_IN_DOCKER) golangci-lint run
 .PHONY: lint
 
+lint-latest: build-docker-dev ## run linter with latest dependencies
+	@echo "+ $@"
+	$(RUN_IN_DOCKER) make _lint-latest
+.PHONY: lint-latest
+
+_lint-latest:
+	@echo "+ $@"
+	TMP="$$(mktemp -d)" && \
+	  cp -r . "$$TMP" && \
+	  cd "$$TMP" && \
+	  $(MAKE) apply-latest-deps lint
+.PHONY: _lint-latest
+
+apply-latest-deps:
+	@echo "+ $@"
+	cp .github/latest-deps/go.mod go.mod
+	cp .github/latest-deps/go.sum go.sum
+	tail -n +5 .github/latest-deps/.golangci.yml >> .golangci.yml
+.PHONY: apply-latest-deps
+
 bash: build-docker-dev ## run bash inside container for development
  ifndef INSIDE_DEV_CONTAINER
 	@echo "+ $@"
@@ -53,10 +73,10 @@ check-tidy: ## ensure go.mod is tidy
 	go mod tidy -diff -modfile=.github/latest-deps/go.mod
 .PHONY: check-tidy
 
-build-docker-dev: ## build development image from Dockerfile.dev
+build-docker-dev: ## build development image from dev.dockerfile
  ifndef INSIDE_DEV_CONTAINER
 	@echo "+ $@"
-	DOCKER_BUILDKIT=1 docker build --tag testpackege:dev - < Dockerfile.dev
+	docker build --tag testpackege:dev - < dev.dockerfile
  endif
 .PHONY: build-docker-dev
 

@@ -5,6 +5,6 @@ FROM golang:1.24.1 AS go
 FROM golangci/golangci-lint:v1.64.7 AS linter
 
 FROM go AS dev
-ENV INSIDE_DEV_CONTAINER 1
+ENV INSIDE_DEV_CONTAINER=1
 WORKDIR /app
 COPY --from=linter /usr/bin/golangci-lint /usr/bin/
