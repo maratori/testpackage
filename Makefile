@@ -23,6 +23,7 @@ test-latest-deps: ## run all tests with latest dependencies
 
 lint: build-docker-dev ## run linter
 	@echo "+ $@"
+	$(RUN_IN_DOCKER) golangci-lint config verify
 	$(RUN_IN_DOCKER) golangci-lint run
 .PHONY: lint
 
