@@ -50,7 +50,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.24.1" # update together with dev.dockerfile
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@v7
         with:
           version: "v1.64.8" # update together with dev.dockerfile
 
@@ -62,7 +62,7 @@ jobs:
         with:
           go-version: "1.24.1" # update together with dev.dockerfile
       - run: make apply-latest-deps
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@v7
         with:
           version: "v1.64.8" # update together with dev.dockerfile
 
