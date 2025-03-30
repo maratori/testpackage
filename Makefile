@@ -44,7 +44,7 @@ apply-latest-deps:
 	@echo "+ $@"
 	cp .github/latest-deps/go.mod go.mod
 	cp .github/latest-deps/go.sum go.sum
-	tail -n +5 .github/latest-deps/.golangci.yml >> .golangci.yml
+	tail -n +6 .github/latest-deps/.golangci.yml >> .golangci.yml
 .PHONY: apply-latest-deps
 
 bash: build-docker-dev ## run bash inside container for development
