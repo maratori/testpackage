@@ -53,6 +53,7 @@ linters:
     - exptostd # detects functions from golang.org/x/exp/ that can be replaced by std functions
     - fatcontext # detects nested contexts in loops
     - forbidigo # forbids identifiers
+    - funcorder # checks the order of functions, methods, and constructors
     - funlen # tool for detection of long functions
     - gocheckcompilerdirectives # validates go compiler directive comments (//go:)
     - gochecknoglobals # checks that no global variables exist
@@ -151,7 +152,7 @@ linters:
       # Default: 10
       max-complexity: 30
       # The maximal average package complexity.
-      # If it's higher than 0.0 (float) the check is enabled
+      # If it's higher than 0.0 (float) the check is enabled.
       # Default: 0.0
       package-average: 10.0
 
@@ -176,6 +177,7 @@ linters:
           # List of file globs that will match this list of settings to compare against.
           # By default, if a path is relative, it is relative to the directory where the golangci-lint command is executed.
           # The placeholder '${base-path}' is substituted with a path relative to the mode defined with `run.relative-path-mode`.
+          # The placeholder '${config-path}' is substituted with a path relative to the configuration file.
           # Default: $all
           files:
             - "$all"
@@ -248,6 +250,11 @@ linters:
         - ^google.golang.org/protobuf/.+Options$
         - ^gopkg.in/yaml.v3.Node$
 
+    funcorder:
+      # Checks if the exported methods of a structure are placed before the non-exported ones.
+      # Default: true
+      struct-method: false
+
     funlen:
       # Checks the number of lines in a function.
       # If lower than 0, disable the check.
@@ -271,7 +278,7 @@ linters:
     gocritic:
       # Settings passed to gocritic.
       # The settings key is the name of a supported gocritic checker.
-      # The list of supported checkers can be find in https://go-critic.github.io/overview.
+      # The list of supported checkers can be found at https://go-critic.com/overview.
       settings:
         captLocal:
           # Whether to restrict checker to params only.
@@ -287,7 +294,7 @@ linters:
       # Default: false
       enable-all: true
       # Disable analyzers by name.
-      # Run `go tool vet help` to see all analyzers.
+      # Run `GL_DEBUG=govet golangci-lint run --enable=govet` to see default, all available analyzers, and enabled analyzers.
       # Default: []
       disable:
         - fieldalignment # too strict
@@ -352,7 +359,7 @@ linters:
         - ".*"
 
     rowserrcheck:
-      # database/sql is always checked
+      # database/sql is always checked.
       # Default: []
       packages:
         - github.com/jmoiron/sqlx
