@@ -230,8 +230,12 @@ linters:
         - map
 
     exhaustruct:
-      # List of regular expressions to exclude struct packages and their names from checks.
-      # Regular expressions must match complete canonical struct package/name/structname.
+      # List of regular expressions to match type names that should be excluded from processing.
+      # Anonymous structs can be matched by '<anonymous>' alias.
+      # Has precedence over `include`.
+      # Each regular expression must match the full type name, including package path.
+      # For example, to match type `net/http.Cookie` regular expression should be `.*/http\.Cookie`,
+      # but not `http\.Cookie`.
       # Default: []
       exclude:
         # std libs
@@ -257,6 +261,9 @@ linters:
         - ^golang.org/x/tools/go/analysis.Analyzer$
         - ^google.golang.org/protobuf/.+Options$
         - ^gopkg.in/yaml.v3.Node$
+      # Allows empty structures in return statements.
+      # Default: false
+      allow-empty-returns: true
 
     funcorder:
       # Checks if the exported methods of a structure are placed before the non-exported ones.
