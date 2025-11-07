@@ -111,27 +111,38 @@ Flags:
 
 ## Changelog
 
+### [v1.1.2] - 2025-11-07
+
+#### Changed
+* Update Go to 1.22
+* Update dependencies
+* Update golangci-lint
+* Update Makefile
+* Test the latest Go version on CI
+* Test the latest dependencies from [.github/latest-deps/go.mod](.github/latest-deps/go.mod) on CI
+
 ### [v1.1.1] - 2023-03-07
 
 #### Changed
-* Update golang to 1.20
+* No changes in linter behavior
+* Update Go to 1.20
 * Update dependencies
-* Update golangci-lint to v1.51.2
+* Update golangci-lint
 * Update Makefile
 
 ### [v1.1.0] - 2022-06-22
 
 #### Changed
 * Allow tests in `main` package by default and add flag `-allow-packages` to allow tests without `_test` suffix (thanks [G-Rath](https://github.com/G-Rath))
-* Update golang to 1.18
+* Update Go to 1.18
 * Migrate to [github actions](https://github.com/maratori/testpackage/actions/workflows/ci.yaml) from travis-ci
-* Update golangci-lint to v1.46.2
+* Update golangci-lint
 
 ### [v1.0.1] - 2020-04-22
 
 #### Changed
 * No changes in linter behavior
-* Use latest go version on travis-ci
+* Use latest go version on CI
 * Update Makefile
 * Update golangci-lint
 
