@@ -65,7 +65,7 @@ jobs:
           go-version: "1.25.4" # update together with dev.dockerfile
       - uses: golangci/golangci-lint-action@v9
         with:
-          version: "v2.6.1" # update together with dev.dockerfile
+          version: "v2.6.2" # update together with dev.dockerfile
 
   lint-latest-deps:
     runs-on: ubuntu-latest
@@ -77,7 +77,7 @@ jobs:
       - run: make apply-latest-deps
       - uses: golangci/golangci-lint-action@v9
         with:
-          version: "v2.6.1" # update together with dev.dockerfile
+          version: "v2.6.2" # update together with dev.dockerfile
 
   check-tidy:
     name: go mod tidy
