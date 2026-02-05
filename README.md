@@ -1,4 +1,4 @@
-# testpackage <br> [![go minimal version][go-img]][go-url] [![go tested version][go-latest-img]][go-latest-url] [![CI][ci-img]][ci-url] [![Codecov][codecov-img]][codecov-url] [![Maintainability][codeclimate-img]][codeclimate-url] [![Go Report Card][goreportcard-img]][goreportcard-url] [![License][license-img]][license-url] [![Go Reference][godoc-img]][godoc-url]
+# testpackage <br> [![go minimal version][go-img]][go-url] [![go tested version][go-latest-img]][go-latest-url] [![CI][ci-img]][ci-url] [![Codecov][codecov-img]][codecov-url] [![Go Report Card][goreportcard-img]][goreportcard-url] [![License][license-img]][license-url] [![Go Reference][godoc-img]][godoc-url]
 
 **testpackage** is a golang linter that makes you use a separate `_test` package.
 
@@ -162,8 +162,6 @@ Flags:
 [ci-url]: https://github.com/maratori/testpackage/actions/workflows/ci.yaml
 [codecov-img]: https://codecov.io/gh/maratori/testpackage/branch/main/graph/badge.svg?token=Pa334H8xEh
 [codecov-url]: https://codecov.io/gh/maratori/testpackage
-[codeclimate-img]: https://api.codeclimate.com/v1/badges/bf753d7560c8e4aa5cf0/maintainability
-[codeclimate-url]: https://codeclimate.com/github/maratori/testpackage/maintainability
 [goreportcard-img]: https://goreportcard.com/badge/github.com/maratori/testpackage
 [goreportcard-url]: https://goreportcard.com/report/github.com/maratori/testpackage
 [license-img]: https://img.shields.io/github/license/maratori/testpackage.svg
