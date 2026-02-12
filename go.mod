@@ -1,6 +1,6 @@
 module github.com/maratori/testpackage
 
-go 1.22.0 // minimal supported version 1.22, tested all versions up to 1.25
+go 1.22.0 // minimal supported version 1.22, tested all versions up to 1.26
 
 require golang.org/x/tools v0.26.0
 
