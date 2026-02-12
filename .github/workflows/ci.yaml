@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.0.2
         with:
-          go-version: "1.25.7" # update together with dev.dockerfile
+          go-version: "1.26.0" # update together with dev.dockerfile
       - name: Debug with tmate SSH if enabled
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_ssh }}
         uses: mxschmitt/action-tmate@c0afd6f790e3a5564914980036ebf83216678101 # v3.23
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.0.2
         with:
-          go-version: "1.25.7" # update together with dev.dockerfile
+          go-version: "1.26.0" # update together with dev.dockerfile
       - run: make test-latest-deps
 
   test22:
@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.0.2
         with:
-          go-version: "1.25.7" # update together with dev.dockerfile
+          go-version: "1.26.0" # update together with dev.dockerfile
       - uses: golangci/golangci-lint-action@1e7e51e771db61008b38414a730f564565cf7c20 # v9.2.0
         with:
           version: "v2.9.0" # update together with dev.dockerfile
@@ -73,7 +73,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.0.2
         with:
-          go-version: "1.25.7" # update together with dev.dockerfile
+          go-version: "1.26.0" # update together with dev.dockerfile
       - run: make apply-latest-deps
       - uses: golangci/golangci-lint-action@1e7e51e771db61008b38414a730f564565cf7c20 # v9.2.0
         with:
@@ -86,7 +86,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.0.2
         with:
-          go-version: "1.25.7" # update together with dev.dockerfile
+          go-version: "1.26.0" # update together with dev.dockerfile
       - run: make check-tidy
 
   typos:
