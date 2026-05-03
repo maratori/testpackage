@@ -10,6 +10,8 @@ import (
 )
 
 func TestAnalyzer_Good(t *testing.T) {
+	t.Parallel()
+
 	testdata, err := filepath.Abs("testdata/good")
 	if err != nil {
 		t.FailNow()
@@ -19,6 +21,8 @@ func TestAnalyzer_Good(t *testing.T) {
 }
 
 func TestAnalyzer_Bad(t *testing.T) {
+	t.Parallel()
+
 	testdata, err := filepath.Abs("testdata/bad")
 	if err != nil {
 		t.FailNow()
@@ -28,6 +32,8 @@ func TestAnalyzer_Bad(t *testing.T) {
 }
 
 func TestAnalyzer_Allowed(t *testing.T) {
+	t.Parallel()
+
 	analyzer := testpackage.NewAnalyzer()
 	err := analyzer.Flags.Set(testpackage.AllowPackagesFlagName, "allowed")
 
@@ -44,6 +50,8 @@ func TestAnalyzer_Allowed(t *testing.T) {
 }
 
 func TestAnalyzer_InvalidRegexp(t *testing.T) {
+	t.Parallel()
+
 	invalid := `\Ca`
 	analyzer := testpackage.NewAnalyzer()
 	err := analyzer.Flags.Set(testpackage.SkipRegexpFlagName, invalid)
