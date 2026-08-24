@@ -1,4 +1,4 @@
-# update together with .github/workflows/ci.yml
+# update together with .github/workflows/ci.yml and .github/latest-deps/go.mod (for minor version change)
 FROM golang:1.27.0 AS go
 
 # update together with .github/workflows/ci.yml
