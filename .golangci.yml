@@ -269,6 +269,9 @@ linters:
       # Allows empty structures in return statements.
       # Default: false
       allow-empty-returns: true
+      # Allow empty literals the blank identifier receives.
+      # Default: false
+      allow-empty-blank-assignments: true
 
     funcorder:
       # Checks if the exported methods of a structure are placed before the non-exported ones.
